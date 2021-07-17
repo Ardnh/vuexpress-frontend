@@ -10,21 +10,31 @@
             ></data-iterator>
          </v-card>
       </v-card>
-      <overlay-dialog
-         @onClose="showDialog = false"
-         :dialog="showDialog"
-         :title="title"
-         :action="action"
-         :someData="someData"
-      ></overlay-dialog>
+      <overlay-dialog :dialog="showDialog">
+         <edit-form 
+            v-if="action === 'edit'"
+            @onClose="showDialog = !showDialog"
+         ></edit-form>
+         <detail-form 
+            v-if="action === 'detail'"
+            @onClose="showDialog = !showDialog"
+         ></detail-form>
+         <delete-form 
+            v-if="action === 'delete'"
+            @onClose="showDialog = !showDialog"
+         ></delete-form>
+      </overlay-dialog>
    </v-container>
 </template>
 <script>
 import DataIterator from '../components/global/DataIterator.vue'
 import HomeHeader from '../components/home/HomeHeader.vue'
 import OverlayDialog from '../components/global/BaseOverlay.vue'
+import EditForm from '../components/home/EditForm.vue'
+import DetailForm from '../components/home/DetailForm.vue'
+import DeleteForm from '../components/home/DeleteForm.vue'
 export default {
-   components: { DataIterator, HomeHeader, OverlayDialog },
+   components: { DataIterator, HomeHeader, OverlayDialog, EditForm, DetailForm, DeleteForm },
    data(){
       return{
          totalMhs: 500,
@@ -43,15 +53,12 @@ export default {
       },
       detailItem(id){
          this.changeData('Detail Mahasiswa', 'detail', id)
-         console.log(id)
       },
       editItem(id){
          this.changeData('Edit Data', 'edit', id)
-         console.log(id)
       },
       deleteItem(id){
          this.changeData('Hapus Data', 'delete', id)
-         console.log(id)
       }
    }
 };

@@ -5,20 +5,17 @@
          <v-btn @click.stop="showDialog = !showDialog" color="cyan darken-5 text-capitalize">Tambah mahasiswa</v-btn>
          <v-card-text>Total mahasiswa: {{ totalMhs }}</v-card-text>
       </v-card-actions>
-      <base-dialog 
-         :dialog="showDialog"
-         @onClose="showDialog = false"
-         title="Tambah Mahasiswa"
-         action="tambah"
-         someData=""
-      ></base-dialog>
+      <base-dialog :dialog="showDialog">
+         <tambah-form @onClose="showDialog = !showDialog"></tambah-form>
+      </base-dialog>
    </v-card>
 </template>
 <script>
 import BaseDialog from '../global/BaseOverlay.vue'
+import TambahForm from './TambahForm.vue'
 export default {
    props:['totalMhs'],
-   components:{ BaseDialog },
+   components:{ BaseDialog, TambahForm },
    data(){
       return{
          showDialog: false,
