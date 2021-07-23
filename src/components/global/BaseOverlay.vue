@@ -1,5 +1,5 @@
 <template>
-   <v-overlay :value="dialog">
+   <v-overlay dark :value="dialog">
       <slot></slot>
    </v-overlay>
 </template>

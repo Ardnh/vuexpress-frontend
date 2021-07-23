@@ -2,11 +2,11 @@
    <v-card class="mt-10">
       <v-card-title>Mahasiswa Terdaftar</v-card-title>
       <v-card-actions>
-         <v-btn @click.stop="showDialog = !showDialog" color="cyan darken-5 text-capitalize">Tambah mahasiswa</v-btn>
+         <v-btn @click="showDialog = !showDialog" color="cyan darken-5 text-capitalize">Tambah mahasiswa</v-btn>
          <v-card-text>Total mahasiswa: {{ totalMhs }}</v-card-text>
       </v-card-actions>
       <base-dialog :dialog="showDialog">
-         <tambah-form @onClose="showDialog = !showDialog"></tambah-form>
+         <tambah-form @close-modal="showDialog = !showDialog"></tambah-form>
       </base-dialog>
    </v-card>
 </template>

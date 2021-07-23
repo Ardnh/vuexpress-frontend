@@ -10,18 +10,19 @@
             ></data-iterator>
          </v-card>
       </v-card>
-      <overlay-dialog :dialog="showDialog">
-         <edit-form 
-            v-if="action === 'edit'"
-            @onClose="showDialog = !showDialog"
+      <overlay-dialog :dialog="showEditDialog">
+         <edit-form
+            @close-modal="showEditDialog = !showEditDialog"
          ></edit-form>
+      </overlay-dialog>
+      <overlay-dialog :dialog="showDetailDialog">
          <detail-form 
-            v-if="action === 'detail'"
-            @onClose="showDialog = !showDialog"
+            @close-modal="showDetailDialog = !showDetailDialog"
          ></detail-form>
+      </overlay-dialog>
+      <overlay-dialog :dialog="showDeleteDialog">
          <delete-form 
-            v-if="action === 'delete'"
-            @onClose="showDialog = !showDialog"
+            @close-modal="showDeleteDialog = !showDeleteDialog"
          ></delete-form>
       </overlay-dialog>
    </v-container>
@@ -39,26 +40,23 @@ export default {
       return{
          totalMhs: 500,
          showDialog: false,
-         title: "",
-         action: "",
-         someData: []
+         showDetailDialog: false,
+         showEditDialog: false,
+         showDeleteDialog: false
       }
    },
    methods:{
-      changeData(title, action, someData){
-         this.showDialog = !this.showDialog
-         this.title = title
-         this.action = action
-         this.someData = someData
-      },
       detailItem(id){
-         this.changeData('Detail Mahasiswa', 'detail', id)
+         this.showDetailDialog = !this.showDetailDialog
+         console.log(id)
       },
       editItem(id){
-         this.changeData('Edit Data', 'edit', id)
+         this.showEditDialog = !this.showEditDialog
+         console.log(id)
       },
       deleteItem(id){
-         this.changeData('Hapus Data', 'delete', id)
+         this.showDeleteDialog = !this.showDeleteDialog
+         console.log(id)
       }
    }
 };
